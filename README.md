@@ -16,6 +16,7 @@ FunFinder — веб-сайт для подбора мест в Челябинс
 | Бутаков Дмитрий | [@DimaButakov](https://github.com/DimaButakov) |
 | Корякин Данил | [@danilkoryakin2006-bit](https://github.com/danilkoryakin2006-bit) |
 | Курманов Радмир | [@Mot1onN](https://github.com/Mot1onN) |
+| Корнев Егор | [@EgorDoy](https://github.com/EgorDoy) |
 
 [Техническое задание](Техническое%20задание.md)
 
