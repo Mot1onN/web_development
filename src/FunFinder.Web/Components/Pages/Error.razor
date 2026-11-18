@@ -1,0 +1,25 @@
+﻿@page "/Error"
+@using System.Diagnostics
+
+<PageTitle>Ошибка — FunFinder</PageTitle>
+
+<h1>Не удалось открыть страницу</h1>
+<p><a href="/">На главную</a></p>
+
+@if (ShowRequestId)
+{
+    <p>
+        <strong>Код запроса</strong> <code>@RequestId</code>
+    </p>
+}
+
+@code {
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    private string? RequestId { get; set; }
+    private bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+    protected override void OnInitialized() =>
+        RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+}
