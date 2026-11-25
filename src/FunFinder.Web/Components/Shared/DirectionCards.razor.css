@@ -8,11 +8,55 @@
 }
 
 .direction-card {
+    position: relative;
     min-width: 0;
     padding: clamp(1.125rem, 2.6vw, 1.625rem);
     border: 1px solid var(--line);
     border-radius: 1.25rem;
     background: var(--surface);
+}
+
+.direction-card:hover,
+.direction-card:focus-within {
+    border-color: #5e816a;
+    background: #f9fbf2;
+}
+
+.direction-card[data-selected="true"] {
+    border-color: #41684a;
+    background: #edf5dc;
+    box-shadow: inset 0 0 0 1px #41684a;
+}
+
+.direction-link {
+    text-decoration: none;
+}
+
+.direction-link::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    content: "";
+}
+
+.direction-indicator {
+    position: absolute;
+    inset-block-start: clamp(1.125rem, 2.6vw, 1.625rem);
+    inset-inline-end: clamp(1.125rem, 2.6vw, 1.625rem);
+    display: grid;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: 50%;
+    color: #41684a;
+    background: #eff3e7;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+[data-selected="true"] .direction-indicator {
+    color: white;
+    background: #41684a;
 }
 
 .direction-card--food {
