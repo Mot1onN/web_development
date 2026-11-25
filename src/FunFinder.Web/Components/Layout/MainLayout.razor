@@ -1,9 +1,13 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 
-<header class="site-header">
-    <a href="/">FunFinder</a>
+<header class="site-header site-shell">
+    <a class="brand" href="./">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        FunFinder
+    </a>
+    <a class="header-link" href="./#napravleniya" data-enhance-nav="false">Направления <span aria-hidden="true">↘</span></a>
 </header>
-<main class="content">
+<main class="site-content site-shell">
     @Body
 </main>
 

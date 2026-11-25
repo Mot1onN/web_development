@@ -1,0 +1,110 @@
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+    min-height: 28rem;
+    overflow: hidden;
+    border-radius: clamp(1.25rem, 3vw, 2rem);
+    background: var(--pine);
+    color: #faf9f4;
+}
+
+.hero-copy {
+    align-self: center;
+    padding: clamp(1.625rem, 5vw, 4rem);
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(2.35rem, 4.4vw, 4.35rem);
+    font-weight: 780;
+    line-height: 1.01;
+    letter-spacing: -.06em;
+}
+
+h1 span {
+    display: block;
+    color: var(--lime);
+}
+
+.hero-copy p {
+    max-width: 31ch;
+    margin: 1.3rem 0 1.75rem;
+    color: #d4dfd4;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+}
+
+.hero-image {
+    position: relative;
+    min-height: 18rem;
+    margin: 0;
+    isolation: isolate;
+    background: #2d4a48;
+}
+
+.hero-image img {
+    position: absolute;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 57% 58%;
+}
+
+.hero-image::after {
+    position: absolute;
+    z-index: -1;
+    inset: 42% 0 0;
+    background: linear-gradient(transparent, #101e18ed);
+    content: "";
+}
+
+figcaption {
+    position: absolute;
+    inset: auto clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 1.6rem);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .35rem 1rem;
+}
+
+figcaption span {
+    font-size: .8rem;
+}
+
+figcaption a {
+    text-underline-offset: .2em;
+}
+
+figcaption a:focus-visible {
+    outline-color: var(--lime);
+}
+
+.directions {
+    margin-block-start: clamp(2rem, 5vw, 3.75rem);
+    scroll-margin-block: 1.25rem;
+}
+
+h2 {
+    margin: 0 0 1.05rem;
+    font-size: clamp(1.55rem, 3vw, 2.4rem);
+    line-height: 1.15;
+    letter-spacing: -.045em;
+}
+
+@media (max-width: 52rem) {
+    .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 28rem) {
+    h1 {
+        font-size: clamp(1.75rem, 8.6vw, 2.35rem);
+    }
+
+    .hero-image {
+        min-height: 14rem;
+    }
+}
