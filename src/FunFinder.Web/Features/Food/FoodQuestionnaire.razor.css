@@ -1,0 +1,155 @@
+.questionnaire {
+    max-width: 46rem;
+    margin-inline: auto;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: clamp(1.1rem, 3vw, 1.75rem);
+    background: var(--surface);
+}
+
+.questionnaire-header,
+.questionnaire-body {
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.questionnaire-header {
+    background: var(--pine);
+    color: var(--lime);
+}
+
+h1,
+h2,
+.questionnaire-header p {
+    margin: 0;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -.055em;
+}
+
+.questionnaire-header p {
+    margin-top: .45rem;
+    color: #d4dfd4;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.35rem, 3.4vw, 1.85rem);
+    line-height: 1.2;
+    letter-spacing: -.035em;
+    scroll-margin-block-start: 1rem;
+}
+
+.progress {
+    display: grid;
+    gap: .4rem;
+    margin-bottom: 1.25rem;
+    color: var(--muted);
+    font-size: .875rem;
+    font-weight: 650;
+}
+
+progress {
+    width: 100%;
+    height: .5rem;
+    accent-color: #548064;
+}
+
+fieldset {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: .55rem;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    min-height: 3rem;
+    padding: .6rem .75rem;
+    border: 1px solid var(--line);
+    border-radius: .7rem;
+    cursor: pointer;
+}
+
+.option:hover {
+    border-color: #548064;
+}
+
+.option:has(input:checked) {
+    border-color: #548064;
+    background: #edf4df;
+}
+
+.option input {
+    flex: none;
+    margin: 0;
+    accent-color: #2d674d;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .6rem;
+    margin-top: 1.4rem;
+}
+
+.actions button {
+    border: 1px solid transparent;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.actions .secondary {
+    border-color: var(--line);
+    background: transparent;
+    color: var(--pine);
+}
+
+.actions .secondary:hover {
+    background: #f1f4ea;
+}
+
+.actions .next {
+    margin-inline-start: auto;
+}
+
+.actions .next:focus-visible {
+    outline-color: #2d674d;
+}
+
+.actions button:disabled {
+    border-color: var(--line);
+    background: #eef1e9;
+    color: var(--muted);
+    cursor: default;
+}
+
+.answers {
+    margin: 0;
+}
+
+.answers div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+    gap: .2rem .75rem;
+    padding: .6rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.answers dt {
+    color: var(--muted);
+}
+
+.answers dd {
+    margin: 0;
+    font-weight: 650;
+}

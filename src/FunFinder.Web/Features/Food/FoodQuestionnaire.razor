@@ -1,0 +1,122 @@
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@rendermode InteractiveServer
+
+<section class="questionnaire" aria-labelledby="food-title">
+    <header class="questionnaire-header">
+        <h1 id="food-title">Покушать</h1>
+        <p>Подберите заведение в Челябинске</p>
+    </header>
+
+    <div class="questionnaire-body">
+        @if (step < Questions.Length)
+        {
+            var question = Questions[step];
+
+            <div class="progress">
+                <span>Вопрос @(step + 1) из @Questions.Length</span>
+                <progress value="@(step + 1)" max="@Questions.Length" aria-label="Шаг анкеты"></progress>
+            </div>
+
+            <h2 @ref="stepHeading" id="food-question" tabindex="-1">@question.Prompt</h2>
+
+            <form @onsubmit="Next" @onsubmit:preventDefault>
+                <fieldset @key="question" aria-labelledby="food-question" disabled="@(!RendererInfo.IsInteractive)">
+                    @foreach (var option in question.Options)
+                    {
+                        <label class="option">
+                            <input type="radio" name="food-answer" value="@option"
+                                   checked="@(answers[step] == option)"
+                                   @onchange="() => answers[step] = option" />
+                            <span>@option</span>
+                        </label>
+                    }
+                </fieldset>
+
+                <div class="actions">
+                    @if (step > 0)
+                    {
+                        <button class="button secondary" type="button" @onclick="Previous">Назад</button>
+                    }
+                    <button class="button button--primary next" type="submit" disabled="@(answers[step] is null)">
+                        @(step == Questions.Length - 1 ? "Проверить ответы" : "Далее")
+                    </button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <h2 @ref="stepHeading" tabindex="-1">Ваши ответы</h2>
+            <dl class="answers">
+                @for (var index = 0; index < Questions.Length; index++)
+                {
+                    <div>
+                        <dt>@Questions[index].Label</dt>
+                        <dd>@answers[index]</dd>
+                    </div>
+                }
+            </dl>
+            <div class="actions">
+                <button class="button secondary" type="button" @onclick="Restart">Начать заново</button>
+                <button class="button button--primary next" type="button" @onclick="Edit">Изменить ответы</button>
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    private static readonly Question[] Questions =
+    [
+        new("Тип заведения", "Какое заведение предпочитаете?",
+            ["Кафе", "Ресторан", "Кофейня", "Фастфуд", "Неважно"]),
+        new("Кухня", "Какую кухню хочется попробовать?",
+            ["Русская", "Итальянская", "Грузинская", "Азиатская", "Неважно"]),
+        new("Бюджет", "Какой бюджет на человека?",
+            ["До 1 000 ₽", "До 1 500 ₽", "До 2 500 ₽", "Без ограничений"]),
+        new("Район", "В каком районе удобно встретиться?",
+            ["Калининский", "Курчатовский", "Ленинский", "Металлургический", "Советский",
+             "Тракторозаводский", "Центральный", "Любой район"]),
+        new("Компания", "С кем идёте?",
+            ["Один или одна", "Вдвоём", "С друзьями", "С семьёй", "Неважно"])
+    ];
+
+    private readonly string?[] answers = new string?[Questions.Length];
+    private ElementReference stepHeading;
+    private int step;
+    private bool focusHeading;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (focusHeading)
+        {
+            focusHeading = false;
+            await stepHeading.FocusAsync();
+        }
+    }
+
+    private void Next()
+    {
+        if (step < Questions.Length && answers[step] is not null)
+        {
+            MoveTo(step + 1);
+        }
+    }
+
+    private void Previous() => MoveTo(step - 1);
+
+    private void Edit() => MoveTo(0);
+
+    private void Restart()
+    {
+        Array.Clear(answers);
+        MoveTo(0);
+    }
+
+    private void MoveTo(int nextStep)
+    {
+        step = nextStep;
+        focusHeading = true;
+    }
+
+    private sealed record Question(string Label, string Prompt, string[] Options);
+}

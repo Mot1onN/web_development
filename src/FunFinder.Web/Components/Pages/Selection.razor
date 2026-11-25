@@ -1,31 +1,40 @@
 @page "/podbor/{DirectionSlug?}"
 @using FunFinder.Web.Components.Shared
+@using FunFinder.Web.Features.Food
 @using FunFinder.Web.Features.Selection
 @inject NavigationManager Navigation
 
 <PageTitle>@(selectedDirection is null ? "Выбор направления — FunFinder" : $"{selectedDirection.Title} — FunFinder")</PageTitle>
 
 <div class="selection">
-    <a class="back-link" href="./"><span aria-hidden="true">←</span> На главную</a>
+    @if (selectedDirection?.Slug == "food")
+    {
+        <a class="back-link" href="podbor"><span aria-hidden="true">←</span> К выбору направления</a>
+        <FoodQuestionnaire />
+    }
+    else
+    {
+        <a class="back-link" href="./"><span aria-hidden="true">←</span> На главную</a>
 
-    <section class="selection-intro" aria-labelledby="selection-title">
-        @if (selectedDirection is null)
-        {
-            <h1 id="selection-title">Чем хотите заняться?</h1>
-            <p>Выберите направление, чтобы начать подбор мест в Челябинске.</p>
-        }
-        else
-        {
-            <h1 id="selection-title">Вы выбрали <span>«@selectedDirection.Title»</span></h1>
-            <p>Уточняющие вопросы для этого направления ещё в разработке.</p>
-            <a class="reset-link" href="podbor">Сбросить выбор</a>
-        }
-    </section>
+        <section class="selection-intro" aria-labelledby="selection-title">
+            @if (selectedDirection is null)
+            {
+                <h1 id="selection-title">Чем хотите заняться?</h1>
+                <p>Выберите направление, чтобы начать подбор мест в Челябинске.</p>
+            }
+            else
+            {
+                <h1 id="selection-title">Вы выбрали <span>«@selectedDirection.Title»</span></h1>
+                <p>Уточняющие вопросы для этого направления ещё в разработке.</p>
+                <a class="reset-link" href="podbor">Сбросить выбор</a>
+            }
+        </section>
 
-    <section class="selection-options" aria-labelledby="options-title">
-        <h2 id="options-title">@(selectedDirection is null ? "Направления" : "Изменить направление")</h2>
-        <DirectionCards SelectedSlug="@selectedDirection?.Slug" />
-    </section>
+        <section class="selection-options" aria-labelledby="options-title">
+            <h2 id="options-title">@(selectedDirection is null ? "Направления" : "Изменить направление")</h2>
+            <DirectionCards SelectedSlug="@selectedDirection?.Slug" />
+        </section>
+    }
 </div>
 
 @code {
