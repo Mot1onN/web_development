@@ -1,0 +1,60 @@
+.direction-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(.75rem, 2vw, 1.25rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.direction-card {
+    min-width: 0;
+    padding: clamp(1.125rem, 2.6vw, 1.625rem);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: var(--surface);
+}
+
+.direction-card--food {
+    --icon-bg: #ffebd4;
+    --icon-ink: #87491f;
+}
+
+.direction-card--fun {
+    --icon-bg: #ece5fb;
+    --icon-ink: #5c3d83;
+}
+
+.direction-card--walk {
+    --icon-bg: #e4efcb;
+    --icon-ink: #435a27;
+}
+
+.direction-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.9rem;
+    block-size: 2.9rem;
+    border-radius: .9rem;
+    background: var(--icon-bg);
+    color: var(--icon-ink);
+    font: 1.45rem/1 "Segoe UI Symbol", system-ui, sans-serif;
+}
+
+h3 {
+    margin: .95rem 0 .3rem;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    line-height: 1.2;
+    letter-spacing: -.025em;
+}
+
+p {
+    margin: 0;
+    color: var(--muted);
+}
+
+@media (max-width: 44rem) {
+    .direction-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,12 @@
+@using FunFinder.Web.Features.Selection
+
+<ul class="direction-grid" role="list">
+    @foreach (var direction in ActivityDirection.All)
+    {
+        <li class="@($"direction-card direction-card--{direction.Slug}")">
+            <span class="direction-icon" aria-hidden="true">@direction.Symbol</span>
+            <h3>@direction.Title</h3>
+            <p>@direction.Description</p>
+        </li>
+    }
+</ul>
