@@ -3,10 +3,21 @@
 <ul class="direction-grid" role="list">
     @foreach (var direction in ActivityDirection.All)
     {
-        <li class="@($"direction-card direction-card--{direction.Slug}")">
+        var isSelected = direction.Slug == SelectedSlug;
+        <li class="@($"direction-card direction-card--{direction.Slug}")" data-selected="@isSelected.ToString().ToLowerInvariant()">
             <span class="direction-icon" aria-hidden="true">@direction.Symbol</span>
-            <h3>@direction.Title</h3>
+            <span class="direction-indicator" aria-hidden="true">@(isSelected ? "✓" : "→")</span>
+            <h3>
+                <a class="direction-link" href="@($"podbor/{direction.Slug}")" aria-current="@(isSelected ? "true" : null)">
+                    @direction.Title
+                </a>
+            </h3>
             <p>@direction.Description</p>
         </li>
     }
 </ul>
+
+@code {
+    [Parameter]
+    public string? SelectedSlug { get; set; }
+}
